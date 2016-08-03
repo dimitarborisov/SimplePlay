@@ -1,0 +1,17 @@
+.menu-button{
+    -fx-background-color: 001000;
+}
+
+.menu-button > .arrow-button {
+    -fx-padding: -100;
+    -fx-background-color: transparent;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: -100;
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow, .combo-box .arrow-button{
+    -fx-background-color: transparent;
+}
