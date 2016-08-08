@@ -11,12 +11,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -33,6 +41,8 @@ public class Controller implements Initializable{
     @FXML MenuButton menuButton;
     @FXML Button x;
     @FXML MenuItem menuItem;
+    @FXML MenuItem loadSongs;
+    @FXML VBox songList;
 
 
     private final FileChooser fileChooser = new FileChooser();
@@ -41,6 +51,8 @@ public class Controller implements Initializable{
     private Image playImage;
     private ThreadSlider rSlider;
     private File currentSong;
+    private final DirectoryChooser directoryChooser = new DirectoryChooser();
+    private ArrayList<File> playList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,6 +60,7 @@ public class Controller implements Initializable{
         //currentSong = new File(Main.class.getResource("/Spring_In_My_Step.mp3").toString());
 
         musicPlayer = new MusicPlayer();
+        playList = new ArrayList<File>();
 
         rSlider = new ThreadSlider(timeSlider, musicPlayer);
         rSlider.setUpdate(false);
@@ -78,7 +91,7 @@ public class Controller implements Initializable{
         menuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                File file = fileChooser.showOpenDialog(stage);
+                File file = fileChooser.showOpenDialog(null);
                 if (file != null) {
                     currentSong = file;
                     songName.setText(currentSong.getName());
@@ -87,6 +100,49 @@ public class Controller implements Initializable{
                     } catch (MalformedURLException e1) {
                         e1.printStackTrace();
                     }
+                }
+            }
+        });
+
+
+        loadSongs.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+                File file = directoryChooser.showDialog(stage);
+                if (file != null) {
+                    playList = new ArrayList<File>();
+                    try {
+                        Files.walk(Paths.get(file.getPath())).forEach(filePath -> {
+                            if (Files.isRegularFile(filePath)) {
+                                String[] sl = filePath.toString().split("\\.");
+                                String s = sl[sl.length - 1];
+
+                                if (s.equals("mp3")) {
+                                    playList.add(new File(filePath.toString()));
+                                }
+                            }
+
+                            if(!playList.isEmpty()){
+                                currentSong = playList.get(0);
+                                songName.setText(currentSong.getName());
+                                for(int i = 0; i<playList.size(); i++){
+                                    Label tempSong = new Label();
+                                    tempSong.setText(playList.get(i).getName());
+                                    songList.getChildren().add(tempSong);
+                                }
+
+                                try {
+                                    musicPlayer.load(currentSong.toURI().toURL().toExternalForm().toString());
+                                } catch (MalformedURLException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        });
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+
                 }
             }
         });
@@ -115,8 +171,7 @@ public class Controller implements Initializable{
         x.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                rSlider.setRunning(false);
-                Platform.exit();
+               exit();
             }
         });
 
@@ -201,6 +256,11 @@ public class Controller implements Initializable{
                     }
                 });
 
+    }
+
+    public void exit(){
+        rSlider.setRunning(false);
+        Platform.exit();
     }
 
     class Delta { double x, y; }

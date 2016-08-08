@@ -5,114 +5,132 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="myStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="500.0" stylesheets="@/css/menuButton.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <children>
-      <ImageView fitHeight="267.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/sprites/background.png" />
-         </image>
-         <effect>
-            <Shadow />
-         </effect>
-      </ImageView>
-      <ImageView fx:id="background" fitHeight="267.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/sprites/background.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/sprites/songImage.png" />
-         </image>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="-Infinity" prefHeight="367.0" prefWidth="500.0" style="-fx-background-color: 000000;" stylesheets="@/css/menuButton.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+      <ScrollPane minHeight="170.0" minWidth="100.0" prefHeight="80.0" prefWidth="350.0">
          <StackPane.margin>
-            <Insets bottom="100.0" right="250.0" />
+            <Insets left="80.0" right="80.0" top="340.0" />
          </StackPane.margin>
-      </ImageView>
+         <content>
+            <VBox fx:id="songList" prefHeight="200.0" prefWidth="325.0" />
+         </content>
+      </ScrollPane>
+        <StackPane fx:id="myStackPane" maxHeight="270.0" minHeight="50.0" prefHeight="100.0" prefWidth="500.0">
+            <children>
+                <ImageView fitHeight="267.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/sprites/background.png" />
+                    </image>
+                    <effect>
+                        <Shadow />
+                    </effect>
+                </ImageView>
+                <ImageView fx:id="background" fitHeight="267.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/sprites/background.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/sprites/songImage.png" />
+                    </image>
+                    <StackPane.margin>
+                        <Insets bottom="100.0" right="250.0" />
+                    </StackPane.margin>
+                </ImageView>
 
-      <Slider fx:id="timeSlider">
-         <StackPane.margin>
-            <Insets bottom="18.0" left="120.0" right="120.0" top="63.0" />
-         </StackPane.margin>
-      </Slider>
+                <Slider fx:id="timeSlider">
+                    <StackPane.margin>
+                        <Insets bottom="18.0" left="120.0" right="120.0" top="63.0" />
+                    </StackPane.margin>
+                </Slider>
 
-       <Button fx:id="prev" contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="">
-           <graphic>
-               <ImageView>
-                   <Image url="@/sprites/prev.png" />
-               </ImageView>
-           </graphic>
-         <StackPane.margin>
-            <Insets right="200.0" top="170.0" />
-         </StackPane.margin>
-       </Button>
+                <Button fx:id="prev" contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="">
+                    <graphic>
+                        <ImageView>
+                            <Image url="@/sprites/prev.png" />
+                        </ImageView>
+                    </graphic>
+                    <StackPane.margin>
+                        <Insets right="200.0" top="170.0" />
+                    </StackPane.margin>
+                </Button>
 
-       <Button fx:id="next" contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="">
-           <graphic>
-               <ImageView>
-                   <Image url="@/sprites/next.png" />
-               </ImageView>
-           </graphic>
-         <StackPane.margin>
-            <Insets left="200.0" top="170.0" />
-         </StackPane.margin>
-       </Button>
+                <Button fx:id="next" contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="">
+                    <graphic>
+                        <ImageView>
+                            <Image url="@/sprites/next.png" />
+                        </ImageView>
+                    </graphic>
+                    <StackPane.margin>
+                        <Insets left="200.0" top="170.0" />
+                    </StackPane.margin>
+                </Button>
 
-       <Button contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="" fx:id="x">
-           <graphic>
-               <ImageView>
-                   <Image url="@/sprites/x.png" />
-               </ImageView>
-           </graphic>
-           <StackPane.margin>
-               <Insets bottom="230.0" left="350.0" />
-           </StackPane.margin>
-       </Button>
+                <Button contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="" fx:id="x">
+                    <graphic>
+                        <ImageView>
+                            <Image url="@/sprites/x.png" />
+                        </ImageView>
+                    </graphic>
+                    <StackPane.margin>
+                        <Insets bottom="230.0" left="350.0" />
+                    </StackPane.margin>
+                </Button>
 
-       <Button id="play" fx:id="play" contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="" StackPane.alignment="CENTER">
-         <graphic>
-               <ImageView>
-                   <Image url="@/sprites/play.png" />
-               </ImageView>
-         </graphic>
-         <StackPane.margin>
-            <Insets top="170.0" />
-         </StackPane.margin>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-       </Button>
-      <Label fx:id="songName" cache="true" cacheHint="QUALITY" depthTest="DISABLE" prefHeight="50.0" prefWidth="247.0" text="Unknown">
-         <font>
-            <Font name="Vivaldi Italic" size="30.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <StackPane.margin>
-            <Insets bottom="150.0" left="120.0" />
-         </StackPane.margin>
-      </Label>
-      <MenuButton fx:id="menuButton" mnemonicParsing="false" text="" textFill="WHITE">
-          <graphic>
-              <ImageView fx:id="menuButtonImage">
-                  <Image url="@/sprites/menu.png" />
-              </ImageView>
-          </graphic>
+                <Button id="play" fx:id="play" contentDisplay="CENTER" defaultButton="true" ellipsisString="" style="-fx-background-color: 00000;" text="" StackPane.alignment="CENTER">
+                    <graphic>
+                        <ImageView>
+                            <Image url="@/sprites/play.png" />
+                        </ImageView>
+                    </graphic>
+                    <StackPane.margin>
+                        <Insets top="170.0" />
+                    </StackPane.margin>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Button>
+                <Label fx:id="songName" cache="true" cacheHint="QUALITY" depthTest="DISABLE" prefHeight="50.0" prefWidth="247.0" text="Unknown">
+                    <font>
+                        <Font name="Vivaldi Italic" size="30.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <StackPane.margin>
+                        <Insets bottom="150.0" left="120.0" />
+                    </StackPane.margin>
+                </Label>
+                <MenuButton fx:id="menuButton" mnemonicParsing="false" text="" textFill="WHITE">
+                    <graphic>
+                        <ImageView fx:id="menuButtonImage">
+                            <Image url="@/sprites/menu.png" />
+                        </ImageView>
+                    </graphic>
 
-          <items>
-          <MenuItem fx:id="menuItem" mnemonicParsing="false" text="Load song" />
-        </items>
-         <StackPane.margin>
-            <Insets bottom="230.0" left="300.0" />
-         </StackPane.margin>
-      </MenuButton>
+                    <items>
+                        <MenuItem fx:id="menuItem" mnemonicParsing="false" text="Load song" />
+                  <MenuItem fx:id="loadSongs" mnemonicParsing="false" text="Load folder" />
+                    </items>
+                    <StackPane.margin>
+                        <Insets bottom="230.0" left="300.0" />
+                    </StackPane.margin>
+                </MenuButton>
 
-   </children>
+            </children>
+        </StackPane>
+    </children>
+   <padding>
+      <Insets bottom="70.0" />
+   </padding>
 </StackPane>
